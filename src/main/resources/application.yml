@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/gikhub
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create
+      use-new-id-generate-mappings: false
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
