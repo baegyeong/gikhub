@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="172dp"
+        android:fontFamily="@font/pretendardbold"
         android:shadowColor="#40000000"
         android:shadowRadius="15.0"
         android:text="@string/app_name"
@@ -51,7 +52,8 @@
             android:background="@drawable/button_round_login"
             android:textColor="@color/white"
             android:text="@string/login"
-            android:textSize="16dp" />
+            android:fontFamily="@font/pretendardregular"
+            android:textSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/signup_btn"
@@ -59,6 +61,7 @@
             android:layout_height="55dp"
             android:background="@drawable/button_round_signup"
             android:text="@string/signup"
-            android:textSize="16dp" />
+            android:fontFamily="@font/pretendardregular"
+            android:textSize="18sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
