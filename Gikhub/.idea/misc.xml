@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gikhub/app/src/main/res/drawable/button_round.xml" value="0.1995" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gikhub/app/src/main/res/drawable/button_round_signup.xml" value="0.2345" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Gikhub/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/button_round_login.xml" value="0.1485" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/button_round_signup.xml" value="0.132" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/input_info_button.xml" value="0.1485" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/font/app_font.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_buy_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_eat_fragment.xml" value="0.34739583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_home_fragment.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_talk_fragment.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_user_fragment.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/fragment_eat.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/menu/bottom_navigation_main.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/menu/botton_navigation_main.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/menu/button_navigation_main.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
