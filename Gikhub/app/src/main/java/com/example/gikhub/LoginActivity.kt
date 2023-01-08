@@ -10,7 +10,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val intent = Intent(this, SignUpActivity::class.java) // 콜론이 2개
+        val intent = Intent(this, SignUpActivity::class.java)
         signup_msg2.setOnClickListener{startActivity(intent)}
+
+        val goHomeIntent = Intent(this, HomeFragment::class.java)
+        login_btn.setOnClickListener{startActivity(goHomeIntent)}
     }
 }
