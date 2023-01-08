@@ -10,10 +10,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val intent = Intent(this, SignUpActivity::class.java)
-        signup_msg2.setOnClickListener{startActivity(intent)}
+        val goSignUp = Intent(this, SignUpActivity::class.java)
+        signup_msg2.setOnClickListener{startActivity(goSignUp)}
 
-        val goHomeIntent = Intent(this, HomeFragment::class.java)
+        val goHomeIntent = Intent(this, MainActivity::class.java)
         login_btn.setOnClickListener{startActivity(goHomeIntent)}
     }
 }
