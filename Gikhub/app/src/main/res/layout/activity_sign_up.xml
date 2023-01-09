@@ -56,95 +56,64 @@
                 android:textColor="@color/black" />
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email_btn"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="340dp"
-                android:layout_height="53dp"
-                android:layout_marginBottom="10dp"
-                android:textAlignment="viewStart">
-
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="340dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="53dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="13dp"
                     android:background="@drawable/input_info_button"
                     android:hint="학교이메일"
                     android:fontFamily="@font/pretendardregular"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:textSize="14sp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/passwd_btn"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="340dp"
-                android:layout_height="53dp"
-                android:layout_marginBottom="10dp"
-                android:textAlignment="viewStart">
+                </EditText>
 
                 <EditText
+                    android:inputType="textPassword"
                     android:id="@+id/passwd"
                     android:layout_width="340dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="53dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="13dp"
                     android:background="@drawable/input_info_button"
                     android:hint="비밀번호"
                     android:fontFamily="@font/pretendardregular"
                     android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/name_btn"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="340dp"
-                android:layout_height="53dp"
-                android:layout_marginBottom="10dp"
-                android:textAlignment="viewStart">
 
                 <EditText
                     android:id="@+id/name"
                     android:layout_width="340dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="53dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="13dp"
                     android:background="@drawable/input_info_button"
                     android:fontFamily="@font/pretendardregular"
                     android:hint="이름"
                     android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nickname_btn"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="340dp"
-                android:layout_height="53dp"
-                android:layout_marginBottom="10dp"
-                android:textAlignment="viewStart">
 
                 <EditText
                     android:id="@+id/nickname"
                     android:layout_width="340dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="53dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="13dp"
                     android:background="@drawable/input_info_button"
                     android:fontFamily="@font/pretendardregular"
                     android:hint="닉네임"
                     android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phone_number_btn"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="340dp"
-                android:layout_height="53dp"
-                android:layout_marginBottom="30dp">
 
                 <EditText
                     android:id="@+id/phone_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="340dp"
+                    android:layout_height="53dp"
+                    android:layout_marginBottom="28dp"
+                    android:paddingLeft="13dp"
                     android:background="@drawable/input_info_button"
                     android:fontFamily="@font/pretendardregular"
                     android:hint="휴대폰 번호"
                     android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+
 
 
             <androidx.appcompat.widget.AppCompatButton

@@ -55,42 +55,33 @@
             android:textSize="18sp"
             android:textColor="@color/black"/>
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/email_btn"
+        <EditText
+            android:id="@+id/email"
             android:layout_width="340dp"
             android:layout_height="53dp"
-            android:layout_marginBottom="10dp"
-            android:textAlignment="viewStart">
+            android:layout_marginBottom="15dp"
+            android:paddingLeft="13dp"
+            android:background="@drawable/input_info_button"
+            android:hint="이메일"
+            android:fontFamily="@font/pretendardregular"
+            android:textSize="14sp" >
 
-            <EditText
-                android:id="@+id/email"
-                android:layout_width="340dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/input_info_button"
-                android:hint="이메일"
-                android:fontFamily="@font/pretendardregular"
-                android:textSize="14sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+        </EditText>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/passwd_btn"
+        <EditText
+            android:inputType="textPassword"
+            android:id="@+id/passwd"
+            android:textSize="14sp"
             android:layout_width="340dp"
             android:layout_height="53dp"
-            android:layout_marginBottom="30dp">
-            <EditText
-                android:id="@+id/passwd"
-                android:textSize="14sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/input_info_button"
-                android:fontFamily="@font/pretendardregular"
-                android:hint="비밀번호" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginBottom="28dp"
+            android:paddingLeft="13dp"
+            android:background="@drawable/input_info_button"
+            android:fontFamily="@font/pretendardregular"
+            android:hint="비밀번호" >
 
+        </EditText>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login_btn"
