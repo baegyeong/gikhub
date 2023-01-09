@@ -6,26 +6,27 @@ import mergefairy.gikhub.service.UserCreateDto;
 import mergefairy.gikhub.service.UserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-public class userController {
+@RequestMapping("/api/user")
+public class UserController {
     private final UserServiceImpl userServiceImpl;
 
-    /*
-    post
-    회원가입
-     */
+    /*회원가입 폼
+    @GetMapping("/add")
+    public String createUserForm(@ModelAttribute("User") User user)
+    */
 
-    @PostMapping("/api/users")
+
+    //회원가입
+    @PostMapping("/add")
     public ResponseEntity<User> createUser(UserCreateDto userCreateDto){
         User user = userServiceImpl.createUser(userCreateDto);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    //@GetMapping("/api/users")
     /*
     get
     회원 조회
