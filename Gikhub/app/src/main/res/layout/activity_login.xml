@@ -55,33 +55,44 @@
             android:textSize="18sp"
             android:textColor="@color/black"/>
 
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/email_btn"
+            android:layout_width="340dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="15dp"
+            android:textAlignment="viewStart">
         <EditText
             android:id="@+id/email"
             android:layout_width="340dp"
-            android:layout_height="53dp"
-            android:layout_marginBottom="15dp"
-            android:paddingLeft="13dp"
+            android:layout_height="match_parent"
             android:background="@drawable/input_info_button"
             android:hint="이메일"
             android:fontFamily="@font/pretendardregular"
-            android:textSize="14sp" >
+            android:textSize="14sp" />
 
-        </EditText>
+        </com.google.android.material.textfield.TextInputLayout>
 
-
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/passwd_btn"
+            android:layout_width="340dp"
+            android:layout_height="78dp"
+            android:layout_marginBottom="25dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="16"
+            app:passwordToggleEnabled="true">
         <EditText
             android:inputType="textPassword"
             android:id="@+id/passwd"
             android:textSize="14sp"
+            android:maxLength="17"
             android:layout_width="340dp"
             android:layout_height="53dp"
-            android:layout_marginBottom="28dp"
-            android:paddingLeft="13dp"
             android:background="@drawable/input_info_button"
             android:fontFamily="@font/pretendardregular"
-            android:hint="비밀번호" >
-
-        </EditText>
+            android:hint="비밀번호"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login_btn"
