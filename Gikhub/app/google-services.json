@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "143894848816",
+    "project_id": "gikhub-742c9",
+    "storage_bucket": "gikhub-742c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143894848816:android:bafa23ec71bf218c4894f5",
+        "android_client_info": {
+          "package_name": "com.example.gikhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143894848816-sv7fubkpf6qcugk8kpqmtps0cndcahmu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArZN4NYi82c-G6Nz5XSXpvChbnYyJAtJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143894848816-sv7fubkpf6qcugk8kpqmtps0cndcahmu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
