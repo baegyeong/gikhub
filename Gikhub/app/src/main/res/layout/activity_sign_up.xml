@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="100dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,8 +67,10 @@
                 android:id="@+id/email_btn"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="340dp"
-                android:layout_height="55dp"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="25dp"
+                app:counterEnabled="false"
+                app:errorEnabled="true"
                 android:textAlignment="viewStart">
 
                 <EditText
@@ -79,17 +81,21 @@
                     android:fontFamily="@font/pretendardregular"
                     android:hint="학교이메일"
                     android:textSize="14sp" />
+
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwd_btn"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="340dp"
-                android:layout_height="82dp"
+                android:layout_height="102dp"
                 android:textAlignment="viewStart"
                 app:counterEnabled="true"
                 app:counterMaxLength="16"
+                app:errorEnabled="true"
                 app:passwordToggleEnabled="true">
+
 
                 <EditText
                     android:id="@+id/passwd_register"
@@ -109,7 +115,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="340dp"
                 android:layout_height="55dp"
-                android:layout_marginBottom="25dp"
+                android:layout_marginBottom="45dp"
                 android:textAlignment="viewStart">
 
                 <EditText
@@ -119,35 +125,58 @@
                     android:background="@drawable/input_info_button"
                     android:fontFamily="@font/pretendardregular"
                     android:hint="이름"
+                    android:privateImeOptions="defaultInputmode=korean"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nickname_btn"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="340dp"
-                android:layout_height="82dp"
-                android:textAlignment="viewStart"
-                app:counterEnabled="true"
-                app:counterMaxLength="6">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/nickname_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/input_info_button"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nickname_btn"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="340dp"
+                    android:layout_height="102dp"
+                    android:textAlignment="viewStart"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="6"
+                    app:errorEnabled="true">
+
+                    <EditText
+                        android:id="@+id/nickname_input"
+                        android:layout_width="340dp"
+                        android:layout_height="55dp"
+                        android:layout_gravity="left"
+                        android:background="@drawable/input_info_button"
+                        android:fontFamily="@font/pretendardregular"
+                        android:hint="닉네임 (2자~6자)"
+                        android:maxLength="7"
+                        android:privateImeOptions="defaultInputmode=korean"
+                        android:textColorHint="#99000000"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="85dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/button_round_login"
                     android:fontFamily="@font/pretendardregular"
-                    android:hint="닉네임 (2자~6자)"
-                    android:maxLength="7"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="중복확인"
+                    android:textColor="@color/white"
+                    android:translationX="248dp"
+                    android:translationY="-18dp">
+
+                </androidx.appcompat.widget.AppCompatButton>
+            </FrameLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/phone_number_btn"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="340dp"
                 android:layout_height="55dp"
-                android:layout_marginBottom="40dp">
+                android:layout_marginBottom="55dp">
 
                 <EditText
                     android:id="@+id/phone_number"
@@ -178,7 +207,7 @@
             <LinearLayout
                 android:id="@+id/scroll"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="30dp"
                 android:orientation="horizontal" />
 
 
