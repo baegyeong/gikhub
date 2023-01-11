@@ -58,6 +58,7 @@ class SignUpActivity : AppCompatActivity() {
             // 최소 비밀번호 글자수 설정(8자)
         }
 
+        // 이메일 유효성 검사
         val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
         lateinit var email:TextView
         email = findViewById(R.id.email_register)
@@ -97,35 +98,25 @@ class SignUpActivity : AppCompatActivity() {
             Log.d("info", "$email, $passwd, $name, $nickname, $phone")
 
         // 정보가 전부 입력됐는지 확인
-            // 모든 항목이 입력되지 않았을 때
-            if (email.isEmpty() || passwd.isEmpty() || name.isEmpty() || nickname.isEmpty() || phone.isEmpty()) {
+            if (email.isEmpty() || passwd.isEmpty() || name.isEmpty() || nickname.isEmpty() || phone.isEmpty()) {   // 모든 항목이 입력되지 않았을 때
                 Toast.makeText(this, "항목을 채워주세요", Toast.LENGTH_LONG).show()
                 isExistBlank = true
             } else {
                 isExistBlank = false
             }
 
-            if(!isExistBlank){
-                // 이메일 가져오는 코드
-                val savedEmail: String = "0000@example.com"
+            // 이메일 가져오는 코드
+            val savedEmail: String = "0000@example.com"
 
-                // 입력한 값과 비교
-                if (email == savedEmail) {
-                    dialog()
-                }else{
-                    if(!checkEmail())
-                        Toast.makeText(this, "이메일 형식이 아닙니다.", Toast.LENGTH_LONG).show()
-                    else {
-                        Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                        startActivity(goLogin)
-                        //정보들 저장하는 코드
-                    }
-
-
-                }
-
+            if(!isExistBlank && (email==savedEmail))
+                dialog()
+            else if(!isExistBlank && !checkEmail())
+                Toast.makeText(this, "이메일 형식이 아닙니다.", Toast.LENGTH_LONG).show()
+            else {
+                Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                startActivity(goLogin)
+                //정보들 저장하는 코드
             }
-
 
 
             nickname_input.addTextChangedListener(object: TextWatcher{

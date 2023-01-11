@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                 dialog()
             }
         }
-        
+
 
         login_btn.setOnClickListener {
             compareInfo()
