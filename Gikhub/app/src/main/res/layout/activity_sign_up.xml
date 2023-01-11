@@ -113,7 +113,7 @@
                 android:textAlignment="viewStart">
 
                 <EditText
-                    android:id="@+id/name"
+                    android:id="@+id/name_input"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/input_info_button"
@@ -132,7 +132,7 @@
                 app:counterMaxLength="6">
 
                 <EditText
-                    android:id="@+id/nickname"
+                    android:id="@+id/nickname_input"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/input_info_button"

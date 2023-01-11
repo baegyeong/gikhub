@@ -3,20 +3,29 @@ package com.example.gikhub
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Color.red
 import android.graphics.Rect
+import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.widget.addTextChangedListener
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.util.regex.Pattern
+import kotlin.reflect.typeOf
 
 class SignUpActivity : AppCompatActivity() {
     var isExistBlank = false
@@ -49,22 +58,43 @@ class SignUpActivity : AppCompatActivity() {
             // 최소 비밀번호 글자수 설정(8자)
         }
 
-        fun minNickname(testNickname: String){
-                Log.d("nick", "${testNickname.length}")
+        val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+        lateinit var email:TextView
+        email = findViewById(R.id.email_register)
+
+        fun checkEmail():Boolean{
+            var email = email_register.text.toString().trim()
+            val p = Pattern.matches(emailValidation, email)
+            if (p) {
+                //이메일 형태가 정상일 경우
+                email_register.setTextColor(R.color.black.toInt())
+                return true
+            } else {
+                email_register.setTextColor(-65536)
+                return false
+            }
         }
+
+        email_register.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                checkEmail()
+            }
+        })
+
 
         signup_btn.setOnClickListener {
             var email = email_register.text.toString()
             var passwd = passwd_register.text.toString()
-            var name = name.text.toString()
-            var nickname = nickname.text.toString()
+            var name = name_input.text.toString()
+            var nickname = nickname_input.text.toString()
             var phone = phone_number.text.toString()
             Log.d("info", "$email, $passwd, $name, $nickname, $phone")
-            // 이메일 형식 확인
-//            val emailPattern = Patterns.EMAIL_ADDRESS
-//            if(emailPattern.matcher(email).matches()){
-//            } else{
-//            }
 
         // 정보가 전부 입력됐는지 확인
             // 모든 항목이 입력되지 않았을 때
@@ -83,16 +113,38 @@ class SignUpActivity : AppCompatActivity() {
                 if (email == savedEmail) {
                     dialog()
                 }else{
-                    Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                    if(!checkEmail())
+                        Toast.makeText(this, "이메일 형식이 아닙니다.", Toast.LENGTH_LONG).show()
+                    else {
+                        Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                        startActivity(goLogin)
+                        //정보들 저장하는 코드
+                    }
 
-                    //정보들 저장하는 코드
 
-                    //로그인 화면으로 이동
-                    startActivity(goLogin)
                 }
+
             }
 
-            minNickname(nickname)
+
+
+            nickname_input.addTextChangedListener(object: TextWatcher{
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    if(nickname_input.length()<2){
+                        Log.d("length", "${nickname_input.length()}")
+                    nickname_input.setTextColor(Color.parseColor("#ff0000"))
+                }
+
+                }
+            })
         }
     }
 
