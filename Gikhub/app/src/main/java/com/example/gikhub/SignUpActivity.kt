@@ -200,6 +200,8 @@ class SignUpActivity : AppCompatActivity() {
                     testEmail.error = "이메일 형식이 아닙니다."
                 if(!nicknameLength()) // 닉네임 2자~6자
                     testNickname.error = "닉네임은 2자~6자이어야 합니다."
+                if(overlap.text != "확인")
+                    Toast.makeText(this, "닉네임 중복확인을 해주세요.ㄴㅇ", Toast.LENGTH_SHORT).show()
                 else if(email!=savedEmail && checkEmail() &&nicknameLength() && checkNickname() && checkPW()) {
                     Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
                     startActivity(goLogin)
