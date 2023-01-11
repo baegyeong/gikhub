@@ -4,16 +4,23 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
 
             // 이메일, 비밀번호 정보 가져오는 코드
             val savedEmail: String = "0000@example.com"
-            val savedPW: String = "12345678"
+            val savedPW: String = "Aa1234**"
 
             // 입력한 값과 비교
             if (email == savedEmail && passwd == savedPW) {
@@ -59,8 +66,68 @@ class LoginActivity : AppCompatActivity() {
                 dialog()
             }
         }
+        var testEmail = findViewById<TextInputLayout>(R.id.email_btn)
+        // 이메일 유효성 검사
+        val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+
+        fun checkEmail():Boolean{
+            var inputEmail = email.text.toString().trim()
+            val p = Pattern.matches(emailValidation, inputEmail)
+            if (p) {
+                //이메일 형태가 정상일 경우
+                email.setTextColor(R.color.black.toInt())
+                testEmail.error = null
+                return true
+            } else {
+                email.setTextColor(-65536)
+                testEmail.error = "이메일 형식이 아닙니다."
+                return false
+            }
+        }
+
+        email.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                checkEmail()
+            }
+        })
+
+        var testPW = findViewById<TextInputLayout>(R.id.passwd_btn)
+        // 최소 닉네임 글자수 설정
+        fun checkPW():Boolean{
+            if(passwd.length()<8){
+                testPW.error = "비밀번호는 8자~16자 입니다."
+                return false
+            }else{
+                testPW.error = null
+                return true
+            }
+        }
+
+        passwd.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                checkPW()
+            }
+
+        })
+
+
         login_btn.setOnClickListener {
-            compareInfo()
+            if(checkEmail()) {
+                compareInfo()
+                checkPW()
+            }
         }
     }
 
