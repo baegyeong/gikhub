@@ -13,6 +13,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import android.view.MotionEvent
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
@@ -21,19 +22,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.isEmpty
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import org.w3c.dom.Text
 import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
     var isExistBlank = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-
         val goLogin = Intent(this, LoginActivity::class.java)
 
         // 이미 가입 된 이메일일 때
@@ -54,8 +56,8 @@ class SignUpActivity : AppCompatActivity() {
             dialog.show()
         }
 
-        var testEmail = findViewById<TextInputLayout>(R.id.email_btn)
         // 이메일 유효성 검사
+        var testEmail = findViewById<TextInputLayout>(R.id.email_btn)
         val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
 
         fun checkEmail():Boolean{
@@ -84,9 +86,8 @@ class SignUpActivity : AppCompatActivity() {
             }
         })
 
-        var testPW = findViewById<TextInputLayout>(R.id.passwd_btn)
-
         // 비밀번호 검사
+        var testPW = findViewById<TextInputLayout>(R.id.passwd_btn)
         val passwdValidation = "^(?=.*[A-Za-z])(?=.*[$@$!%*#?&.])(?=.*[0-9])[A-Za-z[0-9]\$@\$!%*#?&.]{8,16}$"
 
         fun checkPW():Boolean{
@@ -98,10 +99,10 @@ class SignUpActivity : AppCompatActivity() {
                 return true
             } else {
                 passwd_register.setTextColor(-65536)
+                testPW.error = "비밀번호는 숫자, 특수문자, 대/소문자를 포함한\n8자~16자이어야 합니다."
                 return false
             }
         }
-
 
         passwd_register.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -112,6 +113,7 @@ class SignUpActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 checkPW()
+
             }
         })
 
@@ -119,18 +121,18 @@ class SignUpActivity : AppCompatActivity() {
         var testNickname = findViewById<TextInputLayout>(R.id.nickname_btn)
 
         fun nicknameLength():Boolean{
-            if(nickname_input.length()<2){ // 닉네임의 길이가 2자 미만일 경우
-                nickname_input.setTextColor(Color.parseColor("#ff0000"))
+            if(nickname_input.length()<2) { // 닉네임의 길이가 2자 미만일 경우
+                nickname_input.setTextColor(-65536)
                 return false
-            }else{
+            }
+            else {
                 nickname_input.setTextColor(R.color.black.toInt())
-                testNickname.error = null
                 return true
             }
         }
 
         // 닉네임 특수문자 불가
-        val nicknameValidation = "^[a-zA-Z0-9]*\$^[0-9]*\$^[가-힣]*\$"
+        val nicknameValidation = "^[ㄱ-ㅣ가-힣a-zA-Z0-9\\\\s]+\$"
         fun checkNickname():Boolean{
             var nickname = nickname_input.text.toString().trim()
             val p = Pattern.matches(nicknameValidation, nickname)
@@ -138,26 +140,39 @@ class SignUpActivity : AppCompatActivity() {
                 nickname_input.setTextColor(R.color.black.toInt())
                 testNickname.error = null
                 return true
-            } else {
+            }
+            else {
                 nickname_input.setTextColor(-65536)
+                testNickname.error = "특수문자는 사용할 수 없습니다."
                 return false
             }
         }
 
-        nickname_input.addTextChangedListener(object: TextWatcher{
+        nickname_input.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
-
-            override fun afterTextChanged(p0: Editable?) {
+            override fun afterTextChanged(p0: Editable?) { // 닉네임 중복확인인
+               var isOverlap:Boolean= false
+                overlap.setOnClickListener {
+                    if(checkNickname()&&nicknameLength())
+                        if(isOverlap)
+                            testNickname.error = "중복된 닉네임입니다."
+                        else {
+                            testNickname.error = null
+                            overlap.setText("확인")
+                            overlap.setTextColor(Color.parseColor("#000000"))
+                            overlap.setBackgroundResource(R.drawable.input_info_button)
+                        }
+                }
             }
-
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                nicknameLength()
+                checkNickname()  // 닉네임 특수문자
+                nicknameLength() // 닉네임 길이
             }
 
         })
 
-
+        // 회원가입 버튼 눌렀을 때
         signup_btn.setOnClickListener {
             var email = email_register.text.toString()
             var passwd = passwd_register.text.toString()
@@ -178,17 +193,14 @@ class SignUpActivity : AppCompatActivity() {
             val savedEmail: String = "0000@example.com"
 
 
-            if(!isExistBlank) {
-                if (email == savedEmail)
+            if(!isExistBlank) { // 공백 없는 상태에서
+                if (email == savedEmail) // 이미 있는 이메일
                     dialog()
-                if(!checkEmail())
+                if(!checkEmail()) // 이메일 형식
                     testEmail.error = "이메일 형식이 아닙니다."
-                if(!nicknameLength())
-                    testNickname.error = "닉네임이 2자 미만입니다."
-                if(!checkPW()){
-                    testPW.error = "비밀번호는 숫자, 특수문자, 대/소문자를 포함한\n8자~16자이어야 합니다."
-                }
-                else if(email!=savedEmail && checkEmail() && checkNickname() && checkPW()) {
+                if(!nicknameLength()) // 닉네임 2자~6자
+                    testNickname.error = "닉네임은 2자~6자이어야 합니다."
+                else if(email!=savedEmail && checkEmail() &&nicknameLength() && checkNickname() && checkPW()) {
                     Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
                     startActivity(goLogin)
                     //정보들 저장하는 코드
@@ -196,8 +208,6 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
     }
-
-
 
     // 화면 클릭시 키보드 내리기 및 포커스 제거
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {

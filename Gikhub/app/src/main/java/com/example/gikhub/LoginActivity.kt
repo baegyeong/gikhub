@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
 
             // 이메일, 비밀번호 정보 가져오는 코드
             val savedEmail: String = "0000@example.com"
-            val savedPW: String = "12345678"
+            val savedPW: String = "Aa1234**"
 
             // 입력한 값과 비교
             if (email == savedEmail && passwd == savedPW) {
@@ -101,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
         // 최소 닉네임 글자수 설정
         fun checkPW():Boolean{
             if(passwd.length()<8){
-                testPW.error = "비밀번호는 8자 이상입니다."
+                testPW.error = "비밀번호는 8자~16자 입니다."
                 return false
             }else{
                 testPW.error = null
