@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/framelayout_main"
+    tools:context=".navigation.TalkFragment">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/talk_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/talk_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardbold"
+            android:gravity="center"
+            android:text="@string/talk"
+            android:textColor="@color/blue"
+            android:textSize="25sp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/blue" />
+
+        <LinearLayout
+            android:id="@+id/divider"
+            android:layout_width="330dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:background="@color/blue"
+            android:orientation="vertical" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/context_group"
+        android:layout_width="330dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical">
+
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/write_btn"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/input_info_button"
+        android:fontFamily="@font/pretendardbold"
+        android:text="글쓰기"
+        android:layout_gravity="bottom|center"
+        android:textColor="@color/blue"
+        android:textSize="16sp" />
+
+</FrameLayout>

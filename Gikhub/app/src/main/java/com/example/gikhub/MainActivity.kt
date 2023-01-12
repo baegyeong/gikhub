@@ -3,10 +3,12 @@ package com.example.gikhub
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.LinearLayout
 import androidx.core.app.ActivityCompat
 import com.example.gikhub.navigation.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_talk.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
         return false
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -47,6 +50,20 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         //set default screen
         bottom_navigation.selectedItemId = R.id.action_home
+    }
+
+    fun changeFragment(index: Int){
+        when(index){
+            1->{
+                supportFragmentManager.beginTransaction().replace(R.id.framelayout_write, TalkWriteFragment()).commit()
+            }
+            2->{
+                supportFragmentManager.beginTransaction().replace(R.id.framelayout_view, TalkViewFragment()).commit()
+            }
+            3->{
+                supportFragmentManager.beginTransaction().replace(R.id.framelayout_main, TalkFragment()).commit()
+            }
+        }
     }
 
 }
