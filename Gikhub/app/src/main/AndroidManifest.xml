@@ -13,21 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gikhub"
         tools:targetApi="31">
-<!--        <activity-->
-<!--            android:name=".navigation.HomeFragment"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".navigation.TalkFragment"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".BuyFragment"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".EatFragment"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".UserFragment"-->
-<!--            android:exported="false" />-->
+
         <activity
             android:name=".SignUpActivity"
             android:exported="false"
@@ -37,6 +23,10 @@
             android:exported="false" />
         <activity
             android:name=".OnBoardingActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,9 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
     </application>
 
 </manifest>
