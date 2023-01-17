@@ -3,11 +3,11 @@ package com.example.gikhub.navigation
 import android.app.ProgressDialog.show
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.FrameLayout
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,7 +34,25 @@ class TalkFragment :Fragment(){
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+        val spinner = view.findViewById<Spinner>(R.id.spinner)
+
+        // 어댑터 설정
+        spinner.adapter = ArrayAdapter.createFromResource(activity as MainActivity, R.array.itemList, R.layout.spinner_item)
+        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                when(p2){
+                    0->{
+                        Log.d("spinner","최신순")
+                    }
+                    1->{
+                        Log.d("spinner","댓글순")
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
         return view
     }
-
 }
