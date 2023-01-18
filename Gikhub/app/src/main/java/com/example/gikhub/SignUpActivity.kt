@@ -4,16 +4,14 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Color.red
 import android.graphics.Rect
-import android.icu.lang.UCharacter.GraphemeClusterBreak.L
+import android.icu.text.IDNA
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import android.view.MotionEvent
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
@@ -21,18 +19,46 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.view.isEmpty
-import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import org.w3c.dom.Text
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
 import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
+
+    data class User(
+        val email:String,
+        val password:String,
+        val name:String,
+        val nickName:String,
+        val phoneNo:String
+    )
+
+    interface SignUpInterface{
+        @GET("/validation/join")
+        fun getUserPage(): Call<User>
+
+        @POST("/validation/join")
+        fun getUser(@Body info: User): Call<User>
+    }
+
+    val retrofit = Retrofit.Builder()
+        .baseUrl("https://10.0.2.2:8080/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+    val registerUser = retrofit.create(SignUpInterface::class.java)
+
+
     var isExistBlank = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -172,6 +198,22 @@ class SignUpActivity : AppCompatActivity() {
 
         })
 
+        registerUser.getUserPage().enqueue(object: Callback<User>{
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if(response.isSuccessful()){
+                    Log.d("login","success ${response}")
+                }else{
+                    Log.d("login","but ${response.errorBody()}")
+                }
+            }
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                Log.d("login","error:${t.message}")
+            }
+
+        })
+
+
+
         // 회원가입 버튼 눌렀을 때
         signup_btn.setOnClickListener {
             var email = email_register.text.toString()
@@ -201,15 +243,31 @@ class SignUpActivity : AppCompatActivity() {
                 if(!nicknameLength()) // 닉네임 2자~6자
                     testNickname.error = "닉네임은 2자~6자이어야 합니다."
                 if(overlap.text != "확인")
-                    Toast.makeText(this, "닉네임 중복확인을 해주세요.ㄴㅇ", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "닉네임 중복확인을 해주세요.", Toast.LENGTH_SHORT).show()
                 else if(email!=savedEmail && checkEmail() &&nicknameLength() && checkNickname() && checkPW()) {
                     Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
                     startActivity(goLogin)
-                    //정보들 저장하는 코드
+
+                    val user = User("email", "passwd", "name", "nickname", "phone")
+                    registerUser.getUser(user).enqueue(object: Callback<User>{
+                        override fun onResponse(call: Call<User>, response: Response<User>) {
+                            if(response.isSuccessful()){
+                                Log.d("login","success ${response}")
+                            }else{
+                                Log.d("login","but ${response.errorBody()}")
+                            }
+                        }
+                        override fun onFailure(call: Call<User>, t: Throwable) {
+                            Log.d("login","error:${t.message}")
+                        }
+
+                    })
                 }
             }
         }
     }
+
+
 
     // 화면 클릭시 키보드 내리기 및 포커스 제거
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {

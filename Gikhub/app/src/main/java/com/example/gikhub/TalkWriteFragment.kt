@@ -27,7 +27,6 @@ class TalkWriteFragment : Fragment() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
-
         val click_complete = view.findViewById<Button>(R.id.complete_write)
         click_complete.setOnClickListener {
             val talkViewFragment = TalkViewFragment()
