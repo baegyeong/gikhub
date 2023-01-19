@@ -20,6 +20,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.GsonBuilder
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,16 +45,20 @@ class SignUpActivity : AppCompatActivity() {
     )
 
     interface SignUpInterface{
-        @GET("/validation/join")
-        fun getUserPage(): Call<User>
-
-        @POST("/validation/join")
+        @POST("/api/user/validation/join")
         fun getUser(@Body info: User): Call<User>
+
+        @GET("/api/user/{email}/exists")
+        fun overlapEmail(@Query("email") email: String):Call<User>
+
+        @GET("/api/user/{nickName}/exists")
+        fun overlapNickName(@Query("nickname") nickname: String):Call<User>
     }
+    var gson = GsonBuilder().setLenient().create()
 
     val retrofit = Retrofit.Builder()
         .baseUrl("https://10.0.2.2:8080/")
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
     val registerUser = retrofit.create(SignUpInterface::class.java)
 
@@ -157,9 +163,11 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
 
+
         // 닉네임 특수문자 불가
         val nicknameValidation = "^[ㄱ-ㅣ가-힣a-zA-Z0-9\\\\s]+\$"
         fun checkNickname():Boolean{
+
             var nickname = nickname_input.text.toString().trim()
             val p = Pattern.matches(nicknameValidation, nickname)
             if (p) {
@@ -178,10 +186,29 @@ class SignUpActivity : AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun afterTextChanged(p0: Editable?) { // 닉네임 중복확인인
-               var isOverlap:Boolean= false
                 overlap.setOnClickListener {
+                    var nickname = nickname_input.text.toString()
+
+                    // 닉네임 중복 검사
+                    var isOverlapNickname:Boolean=true
+                    registerUser.overlapNickName("$nickname").enqueue(object : Callback<User> {
+                        override fun onResponse(call: Call<User>, response: Response<User>) {
+                            if (response.isSuccessful()) {
+                                Log.d("login", "success ${response}")
+                                isOverlapNickname = true
+                            } else {
+                                Log.d("login", "but ${response.errorBody()}")
+                                isOverlapNickname= false
+                            }
+                        }
+                        override fun onFailure(call: Call<User>, t: Throwable) {
+                            Log.d("login", "error:${t.message}")
+                            isOverlapNickname = false
+                        }
+                    })
+
                     if(checkNickname()&&nicknameLength())
-                        if(isOverlap)
+                        if(isOverlapNickname)
                             testNickname.error = "중복된 닉네임입니다."
                         else {
                             testNickname.error = null
@@ -197,21 +224,6 @@ class SignUpActivity : AppCompatActivity() {
             }
 
         })
-
-        registerUser.getUserPage().enqueue(object: Callback<User>{
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                if(response.isSuccessful()){
-                    Log.d("login","success ${response}")
-                }else{
-                    Log.d("login","but ${response.errorBody()}")
-                }
-            }
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.d("login","error:${t.message}")
-            }
-
-        })
-
 
 
         // 회원가입 버튼 눌렀을 때
@@ -231,12 +243,30 @@ class SignUpActivity : AppCompatActivity() {
                 isExistBlank = false
             }
 
-            // 이메일 가져오는 코드
-            val savedEmail: String = "0000@example.com"
+
+           // 이메일 중복 검사
+//          val savedEmail: String = "0000@example.com"
+            var savedEmail:Boolean=true
+            registerUser.overlapEmail("$email").enqueue(object : Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    if (response.isSuccessful()) {
+                        Log.d("login", "success ${response}")
+                        savedEmail = true
+                    } else {
+                        Log.d("login", "but ${response.errorBody()}")
+                        savedEmail= false
+                    }
+                }
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    Log.d("login", "error:${t.message}")
+                    savedEmail = false
+                }
+            })
+
 
 
             if(!isExistBlank) { // 공백 없는 상태에서
-                if (email == savedEmail) // 이미 있는 이메일
+                if (savedEmail) // 이미 있는 이메일
                     dialog()
                 if(!checkEmail()) // 이메일 형식
                     testEmail.error = "이메일 형식이 아닙니다."
@@ -244,15 +274,16 @@ class SignUpActivity : AppCompatActivity() {
                     testNickname.error = "닉네임은 2자~6자이어야 합니다."
                 if(overlap.text != "확인")
                     Toast.makeText(this, "닉네임 중복확인을 해주세요.", Toast.LENGTH_SHORT).show()
-                else if(email!=savedEmail && checkEmail() &&nicknameLength() && checkNickname() && checkPW()) {
+                else if(!savedEmail && checkEmail() &&nicknameLength() && checkNickname() && checkPW()) {
                     Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
                     startActivity(goLogin)
 
-                    val user = User("email", "passwd", "name", "nickname", "phone")
+                    val user = User("$email", "$passwd", "$name", "$nickname", "$phone")
                     registerUser.getUser(user).enqueue(object: Callback<User>{
                         override fun onResponse(call: Call<User>, response: Response<User>) {
                             if(response.isSuccessful()){
                                 Log.d("login","success ${response}")
+                                Log.d("login", "$user")
                             }else{
                                 Log.d("login","but ${response.errorBody()}")
                             }
