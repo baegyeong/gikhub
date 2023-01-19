@@ -28,10 +28,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
@@ -49,10 +46,10 @@ class SignUpActivity : AppCompatActivity() {
         fun getUser(@Body info: User): Call<User>
 
         @GET("/api/user/{email}/exists")
-        fun overlapEmail(@Query("email") email: String):Call<User>
+        fun overlapEmail(@Path("email") email: String):Call<User>
 
         @GET("/api/user/{nickName}/exists")
-        fun overlapNickName(@Query("nickname") nickname: String):Call<User>
+        fun overlapNickName(@Path("nickname") nickname: String):Call<User>
     }
     var gson = GsonBuilder().setLenient().create()
 
@@ -249,7 +246,7 @@ class SignUpActivity : AppCompatActivity() {
             var savedEmail:Boolean=true
             registerUser.overlapEmail("$email").enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if (response.isSuccessful()) {
+                    if(response.isSuccessful()) {
                         Log.d("login", "success ${response}")
                         savedEmail = true
                     } else {
