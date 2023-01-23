@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.app.ActivityCompat
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import com.example.gikhub.navigation.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_talk_write.*
+import kotlinx.android.synthetic.main.item_context.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -48,6 +52,17 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         //set default screen
         bottom_navigation.selectedItemId = R.id.action_home
+
+//        val title = write_title.text.toString()
+//        val content = write_content.text.toString()
+//
+//        setDataAtFragment(TalkWriteFragment(), title)
     }
 
+//    fun setDataAtFragment(fragment: Fragment, title:String) {
+//        val bundle = Bundle()
+//        bundle.putString("title", title)
+//
+//        fragment.arguments = bundle
+//    }
 }

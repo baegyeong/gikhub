@@ -1,7 +1,5 @@
 package com.example.gikhub.navigation
 
-import android.app.ProgressDialog.show
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,15 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gikhub.R
 import com.example.gikhub.TalkWriteFragment
 import com.example.gikhub.MainActivity
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.synthetic.main.fragment_talk.*
+import retrofit2.http.POST
 
 
 class TalkFragment :Fragment(){
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.GsonBuilder
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
@@ -34,28 +35,33 @@ import java.util.regex.Pattern
 class SignUpActivity : AppCompatActivity() {
 
     data class User(
+        @SerializedName("email")
         val email:String,
+        @SerializedName("password")
         val password:String,
+        @SerializedName("realName")
         val name:String,
+        @SerializedName("nickName")
         val nickName:String,
+        @SerializedName("phoneNo")
         val phoneNo:String
     )
 
     interface SignUpInterface{
         @POST("/api/user/validation/join")
-        fun getUser(@Body info: User): Call<User>
+        fun getUser(@Body info: User): Call<List<User>>
 
-        @GET("/api/user/{email}/exists")
+        @GET("/api/user/email/{email}/exists")
         fun overlapEmail(@Path("email") email: String):Call<User>
 
-        @GET("/api/user/{nickName}/exists")
-        fun overlapNickName(@Path("nickname") nickname: String):Call<User>
+        @GET("/api/user/nickName/{nickName}/exists")
+        fun overlapNickName(@Path("nickName") nickName: String):Call<User>
     }
-    var gson = GsonBuilder().setLenient().create()
+//    var gson = GsonBuilder().setLenient().create()
 
     val retrofit = Retrofit.Builder()
-        .baseUrl("https://10.0.2.2:8080/")
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .baseUrl("http://10.0.2.2:8080/")
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
     val registerUser = retrofit.create(SignUpInterface::class.java)
 
@@ -142,7 +148,6 @@ class SignUpActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 checkPW()
-
             }
         })
 
@@ -182,38 +187,7 @@ class SignUpActivity : AppCompatActivity() {
         nickname_input.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
-            override fun afterTextChanged(p0: Editable?) { // 닉네임 중복확인인
-                overlap.setOnClickListener {
-                    var nickname = nickname_input.text.toString()
-
-                    // 닉네임 중복 검사
-                    var isOverlapNickname:Boolean=true
-                    registerUser.overlapNickName("$nickname").enqueue(object : Callback<User> {
-                        override fun onResponse(call: Call<User>, response: Response<User>) {
-                            if (response.isSuccessful()) {
-                                Log.d("login", "success ${response}")
-                                isOverlapNickname = true
-                            } else {
-                                Log.d("login", "but ${response.errorBody()}")
-                                isOverlapNickname= false
-                            }
-                        }
-                        override fun onFailure(call: Call<User>, t: Throwable) {
-                            Log.d("login", "error:${t.message}")
-                            isOverlapNickname = false
-                        }
-                    })
-
-                    if(checkNickname()&&nicknameLength())
-                        if(isOverlapNickname)
-                            testNickname.error = "중복된 닉네임입니다."
-                        else {
-                            testNickname.error = null
-                            overlap.setText("확인")
-                            overlap.setTextColor(Color.parseColor("#000000"))
-                            overlap.setBackgroundResource(R.drawable.input_info_button)
-                        }
-                }
+            override fun afterTextChanged(p0: Editable?) { // 닉네임 중복확인
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 checkNickname()  // 닉네임 특수문자
@@ -221,6 +195,38 @@ class SignUpActivity : AppCompatActivity() {
             }
 
         })
+
+        overlap.setOnClickListener {
+            var nickname = nickname_input.text.toString()
+
+            // 닉네임 중복 검사
+            var isOverlapNickname:Boolean=true
+            registerUser.overlapNickName("$nickname").enqueue(object : Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    if (response.isSuccessful()) {
+                        Log.d("nick", "success ${response}")
+                        isOverlapNickname = true
+                    } else {
+                        Log.d("nick", "but ${response.errorBody()?.string()!!}")
+                        isOverlapNickname= false
+                    }
+                }
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    Log.d("nick", "error:${t.message}")
+                    isOverlapNickname = false
+                }
+            })
+
+            if(checkNickname()&&nicknameLength())
+                if(isOverlapNickname)
+                    testNickname.error = "중복된 닉네임입니다."
+                else {
+                    testNickname.error = null
+                    overlap.setText("확인")
+                    overlap.setTextColor(Color.parseColor("#000000"))
+                    overlap.setBackgroundResource(R.drawable.input_info_button)
+                }
+        }
 
 
         // 회원가입 버튼 눌렀을 때
@@ -243,14 +249,14 @@ class SignUpActivity : AppCompatActivity() {
 
            // 이메일 중복 검사
 //          val savedEmail: String = "0000@example.com"
-            var savedEmail:Boolean=true
+            var savedEmail:Boolean=false
             registerUser.overlapEmail("$email").enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if(response.isSuccessful()) {
                         Log.d("login", "success ${response}")
                         savedEmail = true
                     } else {
-                        Log.d("login", "but ${response.errorBody()}")
+                        Log.d("login", "but ${response.errorBody()?.string()!!}")
                         savedEmail= false
                     }
                 }
@@ -276,17 +282,22 @@ class SignUpActivity : AppCompatActivity() {
                     startActivity(goLogin)
 
                     val user = User("$email", "$passwd", "$name", "$nickname", "$phone")
-                    registerUser.getUser(user).enqueue(object: Callback<User>{
-                        override fun onResponse(call: Call<User>, response: Response<User>) {
+                    registerUser.getUser(user).enqueue(object: Callback<List<User>>{
+                        override fun onResponse(
+                            call: Call<List<User>>,
+                            response: Response<List<User>>
+                        ) {
                             if(response.isSuccessful()){
-                                Log.d("login","success ${response}")
-                                Log.d("login", "$user")
+                                Log.d("confirm","success ${response}")
+                                Log.d("confirm", "$user")
                             }else{
-                                Log.d("login","but ${response.errorBody()}")
+                                Log.d("confirm","but ${response.errorBody()?.string()!!}")
                             }
                         }
-                        override fun onFailure(call: Call<User>, t: Throwable) {
-                            Log.d("login","error:${t.message}")
+
+                        override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                            Log.d("confirm","error:${t.message}")
+
                         }
 
                     })
