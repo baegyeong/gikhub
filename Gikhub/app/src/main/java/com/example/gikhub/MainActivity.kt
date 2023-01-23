@@ -53,5 +53,5 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         //set default screen
         bottom_navigation.selectedItemId = R.id.action_home
     }
-    
+
 }
