@@ -52,17 +52,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         //set default screen
         bottom_navigation.selectedItemId = R.id.action_home
-
-//        val title = write_title.text.toString()
-//        val content = write_content.text.toString()
-//
-//        setDataAtFragment(TalkWriteFragment(), title)
     }
-
-//    fun setDataAtFragment(fragment: Fragment, title:String) {
-//        val bundle = Bundle()
-//        bundle.putString("title", title)
-//
-//        fragment.arguments = bundle
-//    }
+    
 }
