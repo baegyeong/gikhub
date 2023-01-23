@@ -15,4 +15,10 @@
 local.properties
 /gikhub
 /gradle
-/src
+gradle.properties
+gradlew
+gradlew.bat
+settings.gradle
+build.gradle
+
+
