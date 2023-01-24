@@ -87,7 +87,13 @@ class TalkWriteFragment : Fragment() {
 
             val title = write_title.text.toString()
             val content = write_content.text.toString()
-            if (!(title.isEmpty()) && !(content.isEmpty())) {
+            if(title.isEmpty())
+                Toast.makeText(view.context,"제목을 입력하세요.", Toast.LENGTH_SHORT).show()
+            else if(content.isEmpty())
+                Toast.makeText(view.context,"내용을 입력하세요.", Toast.LENGTH_SHORT).show()
+            else if(!(title.isEmpty())&&title.length>26)
+                Toast.makeText(view.context,"제목은 25자까지 입력할 수 있습니다.", Toast.LENGTH_SHORT).show()
+            else{
                 val bundle = Bundle()
                 bundle.putString("title", title)
                 bundle.putString("content", content)
