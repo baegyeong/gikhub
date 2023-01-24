@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.findFragment
@@ -20,6 +21,7 @@ import com.example.gikhub.navigation.TalkFragment
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.synthetic.main.fragment_talk.*
 import kotlinx.android.synthetic.main.fragment_talk_write.*
+import kotlinx.android.synthetic.main.item_context.*
 import org.checkerframework.checker.units.qual.m
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,21 +37,19 @@ class TalkWriteFragment : Fragment() {
         @SerializedName("title")
         val title: String,
         @SerializedName("content")
-        val content: String,
-        @SerializedName("user")
-        val user: String
+        val content: String
     )
 
     interface postInterface {
         @POST("/api/talktalk/add")
-        fun addPost(@Body post: Post): Call<List<Post>>
+        fun addPost(@Body post: Post): Call<Post>
     }
 
     val retrofit = Retrofit.Builder()
         .baseUrl("http://10.0.2.2:8080/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-    val addPost = retrofit.create(TalkWriteFragment.postInterface::class.java)
+    val addPostRetrofit = retrofit.create(postInterface::class.java)
 
 
     override fun onCreateView(
@@ -67,26 +67,32 @@ class TalkWriteFragment : Fragment() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+
         val click_complete = view.findViewById<Button>(R.id.complete_write)
-        val info = Post("$write_title", "$write_content", "unknown")
+
         click_complete.setOnClickListener {
+            val writeTitle = view.findViewById<EditText>(R.id.write_title)
+            val writeContent = view.findViewById<EditText>(R.id.write_content)
+            val title = writeTitle.text.toString()
+            val content = writeContent.text.toString()
+            val info = Post("$title", "$content")
+            Log.d("info","$info")
          //    서버 통신
-            addPost.addPost(info).enqueue(object : Callback<List<Post>> {
-                override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
+            addPostRetrofit.addPost(info).enqueue(object : Callback<Post> {
+                override fun onResponse(call: Call<Post>, response: Response<Post>) {
                     if (response.isSuccessful())
                         Log.d("post", "success ${response}")
                     else
                         Log.d("post", "but ${response.errorBody()?.string()!!}")
                 }
 
-                override fun onFailure(call: Call<List<Post>>, t: Throwable) {
+                override fun onFailure(call: Call<Post>, t: Throwable) {
                     Log.d("post", "error:${t.message}")
                 }
 
             })
 
-            val title = write_title.text.toString()
-            val content = write_content.text.toString()
+
             if(title.isEmpty())
                 Toast.makeText(view.context,"제목을 입력하세요.", Toast.LENGTH_SHORT).show()
             else if(content.isEmpty())
