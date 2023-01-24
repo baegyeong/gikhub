@@ -48,7 +48,7 @@
                 android:fontFamily="@font/pretendardmedium"
                 android:text="title"
                 android:textColor="@color/black"
-                android:textSize="21sp" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/detail"
@@ -67,21 +67,24 @@
             android:layout_gravity="center"
             android:text="contentcontentcontent"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="right"
+                android:layout_marginTop="13dp"
             android:text="writer"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <TextView
+                android:id="@+id/write_time"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="right"
+                android:textSize="12sp"
             android:text="2023년 12월 11일 11:11" />
 
         <LinearLayout
@@ -101,7 +104,7 @@
             android:layout_marginBottom="24sp"
             android:text="댓글 0"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

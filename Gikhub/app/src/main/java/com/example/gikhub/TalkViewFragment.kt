@@ -3,6 +3,7 @@ package com.example.gikhub
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,12 +13,17 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import com.example.gikhub.navigation.TalkFragment
 import kotlinx.android.synthetic.main.fragment_talk.*
 import kotlinx.android.synthetic.main.fragment_talk_view.*
+import org.w3c.dom.Text
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class TalkViewFragment : Fragment() {
     private lateinit var callback: OnBackPressedCallback
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,20 +39,15 @@ class TalkViewFragment : Fragment() {
         postTitle.setText("$title")
         val postContent = view.findViewById<TextView>(R.id.post_content)
         postContent.setText("$content")
+        val postTime = view.findViewById<TextView>(R.id.write_time)
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분")
+        val formatted = current.format(formatter)
+        postTime.setText("$formatted")
         return view
 
     }
 
-
-
-//    private var title: String? = null
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        arguments?.let{
-//            title = it.getString("title")
-//        }
-//    }
     override fun onAttach(context: Context){
         super.onAttach(context)
         callback = object: OnBackPressedCallback(true){
