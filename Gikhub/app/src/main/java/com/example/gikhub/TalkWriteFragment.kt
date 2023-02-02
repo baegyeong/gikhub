@@ -33,23 +33,23 @@ import retrofit2.http.POST
 
 class TalkWriteFragment : Fragment() {
 
-    data class Post(
-        @SerializedName("title")
-        val title: String,
-        @SerializedName("content")
-        val content: String
-    )
-
-    interface postInterface {
-        @POST("/api/talktalk/add")
-        fun addPost(@Body post: Post): Call<Post>
-    }
-
-    val retrofit = Retrofit.Builder()
-        .baseUrl("http://10.0.2.2:8080/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-    val addPostRetrofit = retrofit.create(postInterface::class.java)
+//    data class Post(
+//        @SerializedName("title")
+//        val title: String,
+//        @SerializedName("content")
+//        val content: String
+//    )
+//
+//    interface postInterface {
+//        @POST("/api/talktalk/add")
+//        fun addPost(@Body post: Post): Call<Post>
+//    }
+//
+//    val retrofit = Retrofit.Builder()
+//        .baseUrl("http://10.0.2.2:8080/")
+//        .addConverterFactory(GsonConverterFactory.create())
+//        .build()
+//    val addPostRetrofit = retrofit.create(postInterface::class.java)
 
 
     override fun onCreateView(
@@ -75,22 +75,22 @@ class TalkWriteFragment : Fragment() {
             val writeContent = view.findViewById<EditText>(R.id.write_content)
             val title = writeTitle.text.toString()
             val content = writeContent.text.toString()
-            val info = Post("$title", "$content")
-            Log.d("info","$info")
+//            val info = Post("$title", "$content")
+//            Log.d("info","$info")
          //    서버 통신
-            addPostRetrofit.addPost(info).enqueue(object : Callback<Post> {
-                override fun onResponse(call: Call<Post>, response: Response<Post>) {
-                    if (response.isSuccessful())
-                        Log.d("post", "success ${response}")
-                    else
-                        Log.d("post", "but ${response.errorBody()?.string()!!}")
-                }
-
-                override fun onFailure(call: Call<Post>, t: Throwable) {
-                    Log.d("post", "error:${t.message}")
-                }
-
-            })
+//            addPostRetrofit.addPost(info).enqueue(object : Callback<Post> {
+//                override fun onResponse(call: Call<Post>, response: Response<Post>) {
+//                    if (response.isSuccessful())
+//                        Log.d("post", "success ${response}")
+//                    else
+//                        Log.d("post", "but ${response.errorBody()?.string()!!}")
+//                }
+//
+//                override fun onFailure(call: Call<Post>, t: Throwable) {
+//                    Log.d("post", "error:${t.message}")
+//                }
+//
+//            })
 
 
             if(title.isEmpty())

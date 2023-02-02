@@ -47,6 +47,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/context_group"
         android:layout_width="330dp"
+        tools:listitem="@layout/item_context"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

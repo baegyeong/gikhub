@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.gikhub.R
 import com.example.gikhub.TalkWriteFragment
 import com.example.gikhub.MainActivity
-import com.google.gson.annotations.SerializedName
 import kotlinx.android.synthetic.main.fragment_talk.*
-import retrofit2.http.POST
 
 
 class TalkFragment :Fragment(){
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +33,29 @@ class TalkFragment :Fragment(){
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+
+//
+//        val itemList = ArrayList<RecyclerView.postItem>()
+//
+//        itemList.add(RecyclerView.postItem("안녕","몰리","3"))
+//        itemList.add(RecyclerView.postItem("안녕","몰리","3"))
+//        itemList.add(RecyclerView.postItem("안녕","몰리","3"))
+//        itemList.add(RecyclerView.postItem("안녕","몰리","3"))
+//        itemList.add(RecyclerView.postItem("안녕","몰리","3"))
+//        itemList.add(RecyclerView.postItem("안녕","몰리","3"))
+//        itemList.add(RecyclerView.postItem("안녕","몰리","3"))
+//        itemList.add(RecyclerView.postItem("안녕","몰리","3"))
+//        itemList.add(RecyclerView.postItem("안녕","몰리","3"))
+//        itemList.add(RecyclerView.postItem("안녕","몰리","3"))
+//
+//
+//        val boardAdapter = RecyclerView.BoardAdapter(itemList)
+//        boardAdapter.notifyDataSetChanged()
+//
+//        context_group.adapter = boardAdapter
+//        context_group.layoutManager = LinearLayoutManager(activity as MainActivity, LinearLayoutManager.VERTICAL, false)
+
+
         val spinner = view.findViewById<Spinner>(R.id.spinner)
 
         // 어댑터 설정
@@ -53,6 +75,7 @@ class TalkFragment :Fragment(){
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
+
         return view
     }
 }

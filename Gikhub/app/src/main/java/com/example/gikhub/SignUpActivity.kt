@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.firestore.auth.User
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
@@ -36,36 +37,36 @@ import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
 
-    data class User(
-        @SerializedName("email")
-        val email:String,
-        @SerializedName("password")
-        val password:String,
-        @SerializedName("realName")
-        val name:String,
-        @SerializedName("nickName")
-        val nickName:String,
-        @SerializedName("phoneNo")
-        val phoneNo:String
-    )
-
-    interface SignUpInterface{
-        @POST("/api/user/validation/join")
-        fun getUser(@Body info: User): Call<User>
-
-        @GET("/api/user/email/{email}/exists")
-        fun overlapEmail(@Path("email") email: String):Call<String>
-
-        @GET("/api/user/nickName/{nickName}/exists")
-        fun overlapNickName(@Path("nickName") nickName: String):Call<String>
-    }
-    var gson: Gson = GsonBuilder().setLenient().create()
-
-    val retrofit = Retrofit.Builder()
-        .baseUrl("http://10.0.2.2:8080/")
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .build()
-    val registerUser = retrofit.create(SignUpInterface::class.java)
+//    data class User(
+//        @SerializedName("email")
+//        val email:String,
+//        @SerializedName("password")
+//        val password:String,
+//        @SerializedName("realName")
+//        val name:String,
+//        @SerializedName("nickName")
+//        val nickName:String,
+//        @SerializedName("phoneNo")
+//        val phoneNo:String
+//    )
+//
+//    interface SignUpInterface{
+//        @POST("/api/user/validation/join")
+//        fun getUser(@Body info: User): Call<User>
+//
+//        @GET("/api/user/email/{email}/exists")
+//        fun overlapEmail(@Path("email") email: String):Call<String>
+//
+//        @GET("/api/user/nickName/{nickName}/exists")
+//        fun overlapNickName(@Path("nickName") nickName: String):Call<String>
+//    }
+//    var gson: Gson = GsonBuilder().setLenient().create()
+//
+//    val retrofit = Retrofit.Builder()
+//        .baseUrl("http://10.0.2.2:8080/")
+//        .addConverterFactory(GsonConverterFactory.create(gson))
+//        .build()
+//    val registerUser = retrofit.create(SignUpInterface::class.java)
 
 
     var isExistBlank = false
@@ -203,31 +204,31 @@ class SignUpActivity : AppCompatActivity() {
             var nickname = nickname_input.text.toString()
 
             // 닉네임 중복 검사
-            lateinit var isOverlapNickname:String
-
-            fun returnButton(String: String): String? {
-                return isOverlapNickname
-            }
-
-            registerUser.overlapNickName("$nickname").enqueue(object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    if (response.isSuccessful()) {
-                        Log.d("nick","success${response.body()}")
-                        val data = response.body()
-                        if (data != null) {
-                            returnButton(data)
-                        }
-                    }
-                    else {
-                        Log.d("nick", "but ${response.errorBody()?.string()!!}")
-                    }
-                }
-
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.d("nick", "error:${t.message}")
-                }
-            })
-            Log.d("bool", "$isOverlapNickname")
+//            lateinit var isOverlapNickname:String
+            var isOverlapNickname="false"
+//            fun returnButton(String: String): String? {
+//                return isOverlapNickname
+//            }
+//
+//            registerUser.overlapNickName("$nickname").enqueue(object : Callback<String> {
+//                override fun onResponse(call: Call<String>, response: Response<String>) {
+//                    if (response.isSuccessful()) {
+//                        Log.d("nick","success${response.body()}")
+//                        val data = response.body()
+//                        if (data != null) {
+//                            returnButton(data)
+//                        }
+//                    }
+//                    else {
+//                        Log.d("nick", "but ${response.errorBody()?.string()!!}")
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<String>, t: Throwable) {
+//                    Log.d("nick", "error:${t.message}")
+//                }
+//            })
+//            Log.d("bool", "$isOverlapNickname")
 
 
 
@@ -294,27 +295,27 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
                     startActivity(goLogin)
 
-                    val user = User("$email", "$passwd", "$name", "$nickname", "$phone")
-                    Log.d("user","$user")
-                    registerUser.getUser(user).enqueue(object: Callback<User>{
-                        override fun onResponse(
-                            call: Call<User>,
-                            response: Response<User>
-                        ) {
-                            if(response.isSuccessful()){
-                                Log.d("confirm","success ${response}")
-                                Log.d("confirm", "$user")
-                            }else{
-                                Log.d("confirm","but ${response.errorBody()?.string()!!}")
-                            }
-                        }
-
-                        override fun onFailure(call: Call<User>, t: Throwable) {
-                            Log.d("confirm","error:${t.message}")
-
-                        }
-
-                    })
+//                    val user = User("$email", "$passwd", "$name", "$nickname", "$phone")
+//                    Log.d("user","$user")
+//                    registerUser.getUser(user).enqueue(object: Callback<User>{
+//                        override fun onResponse(
+//                            call: Call<User>,
+//                            response: Response<User>
+//                        ) {
+//                            if(response.isSuccessful()){
+//                                Log.d("confirm","success ${response}")
+//                                Log.d("confirm", "$user")
+//                            }else{
+//                                Log.d("confirm","but ${response.errorBody()?.string()!!}")
+//                            }
+//                        }
+//
+//                        override fun onFailure(call: Call<User>, t: Throwable) {
+//                            Log.d("confirm","error:${t.message}")
+//
+//                        }
+//
+//                    })
                 }
             }
         }

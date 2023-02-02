@@ -35,22 +35,22 @@ import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
 
-    data class User(
-        val email:String,
-        val password:String
-    )
-
-    interface LoginInterface{
-        @POST("/api/login")
-        fun getUser(@Body info: User): Call<User>
-    }
-    var gson = GsonBuilder().setLenient().create()
-
-    val retrofit = Retrofit.Builder()
-        .baseUrl("https://10.0.2.2:8080/")
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .build()
-    val loginUser = retrofit.create(LoginInterface::class.java)
+//    data class User(
+//        val email:String,
+//        val password:String
+//    )
+//
+//    interface LoginInterface{
+//        @POST("/api/login")
+//        fun getUser(@Body info: User): Call<User>
+//    }
+//    var gson = GsonBuilder().setLenient().create()
+//
+//    val retrofit = Retrofit.Builder()
+//        .baseUrl("https://10.0.2.2:8080/")
+//        .addConverterFactory(GsonConverterFactory.create(gson))
+//        .build()
+//    val loginUser = retrofit.create(LoginInterface::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val goSignUp = Intent(this, SignUpActivity::class.java)
@@ -82,28 +82,28 @@ class LoginActivity : AppCompatActivity() {
             // 이메일, 비밀번호 정보 가져오는 코드
             var savedEmail: Boolean = true
             var savedPW: Boolean = true
-            val user = User("$email", "$passwd")
-            loginUser.getUser(user).enqueue(object:Callback<User>{
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if(response.isSuccessful()){
-                        Log.d("login","success ${response}")
-                        Log.d("login", "$user")
-                        savedEmail = true
-                        savedPW = true
-                    }else{
-                        Log.d("login","but ${response.errorBody()}")
-                        savedEmail = false
-                        savedPW = false
-                    }
-                }
-
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    Log.d("login","error:${t.message}")
-                    savedEmail = false
-                    savedPW = false
-                }
-
-            })
+//            val user = User("$email", "$passwd")
+//            loginUser.getUser(user).enqueue(object:Callback<User>{
+//                override fun onResponse(call: Call<User>, response: Response<User>) {
+//                    if(response.isSuccessful()){
+//                        Log.d("login","success ${response}")
+//                        Log.d("login", "$user")
+//                        savedEmail = true
+//                        savedPW = true
+//                    }else{
+//                        Log.d("login","but ${response.errorBody()}")
+//                        savedEmail = false
+//                        savedPW = false
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<User>, t: Throwable) {
+//                    Log.d("login","error:${t.message}")
+//                    savedEmail = false
+//                    savedPW = false
+//                }
+//
+//            })
             // 입력한 값과 비교
             if (savedEmail && savedPW) {
                 Toast.makeText(this, "환영합니다!", Toast.LENGTH_SHORT).show()
