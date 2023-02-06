@@ -98,6 +98,7 @@
                 android:orientation="vertical" />
 
         <TextView
+                android:id="@+id/comment_count"
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

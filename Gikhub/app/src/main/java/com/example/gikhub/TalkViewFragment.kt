@@ -19,6 +19,9 @@ import com.example.gikhub.navigation.TalkFragment
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.fragment_talk_view.*
 import kotlinx.android.synthetic.main.item_comment.*
+import okio.Utf8.size
+import org.w3c.dom.Comment
+import java.nio.file.Files.size
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -77,12 +80,15 @@ class TalkViewFragment : Fragment() {
         val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분")
         val formatted = current.format(formatter).toString()
         val itemList = ArrayList<CommentData>()
+        val commentCount = view.findViewById<TextView>(R.id.comment_count)
+        commentCount.setText("댓글 ${itemList.size}")
         sendComment.setOnClickListener {
             val inputComment = view.findViewById<EditText>(R.id.input_comment).text.toString()
 
             itemList.add(CommentData("$commentName", "$inputComment", "$formatted"))
             commentRecyclerView.adapter = CommentAdapter(itemList)
             commentRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            commentCount.setText("댓글 ${itemList.size}")
         }
     }
 

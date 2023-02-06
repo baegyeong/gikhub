@@ -26,6 +26,8 @@ class CommentAdapter(private val data: ArrayList<CommentData>) : RecyclerView.Ad
         holder.view.date.text = data[position].date
     }
 
-    override fun getItemCount()=data.size
+    override fun getItemCount(): Int {
+        return data.size
+    }
 
 }
