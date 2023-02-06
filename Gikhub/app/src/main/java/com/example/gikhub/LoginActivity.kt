@@ -17,12 +17,41 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
+
+//    data class User(
+//        val email:String,
+//        val password:String
+//    )
+//
+//    interface LoginInterface{
+//        @POST("/api/login")
+//        fun getUser(@Body info: User): Call<User>
+//    }
+//    var gson = GsonBuilder().setLenient().create()
+//
+//    val retrofit = Retrofit.Builder()
+//        .baseUrl("https://10.0.2.2:8080/")
+//        .addConverterFactory(GsonConverterFactory.create(gson))
+//        .build()
+//    val loginUser = retrofit.create(LoginInterface::class.java)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val goSignUp = Intent(this, SignUpActivity::class.java)
         super.onCreate(savedInstanceState)
@@ -51,21 +80,43 @@ class LoginActivity : AppCompatActivity() {
             val passwd = passwd.text.toString()
 
             // 이메일, 비밀번호 정보 가져오는 코드
-            val savedEmail: String = "0000@example.com"
-            val savedPW: String = "Aa1234**"
-
+            var savedEmail: Boolean = true
+            var savedPW: Boolean = true
+//            val user = User("$email", "$passwd")
+//            loginUser.getUser(user).enqueue(object:Callback<User>{
+//                override fun onResponse(call: Call<User>, response: Response<User>) {
+//                    if(response.isSuccessful()){
+//                        Log.d("login","success ${response}")
+//                        Log.d("login", "$user")
+//                        savedEmail = true
+//                        savedPW = true
+//                    }else{
+//                        Log.d("login","but ${response.errorBody()}")
+//                        savedEmail = false
+//                        savedPW = false
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<User>, t: Throwable) {
+//                    Log.d("login","error:${t.message}")
+//                    savedEmail = false
+//                    savedPW = false
+//                }
+//
+//            })
             // 입력한 값과 비교
-            if (email == savedEmail && passwd == savedPW) {
+            if (savedEmail && savedPW) {
                 Toast.makeText(this, "환영합니다!", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, MainActivity::class.java))
-            } else if (email != savedEmail && passwd == savedPW) {
+            } else if (!savedEmail && savedPW) {
                 Toast.makeText(this, "이메일을 다시 확인해주세요.", Toast.LENGTH_LONG).show()
-            } else if (email == savedEmail && passwd != savedPW) {
+            } else if (savedEmail && !savedPW) {
                 Toast.makeText(this, "비밀번호를 다시 확인해주세요.", Toast.LENGTH_LONG).show()
             } else {
                 dialog()
             }
         }
+
         var testEmail = findViewById<TextInputLayout>(R.id.email_btn)
         // 이메일 유효성 검사
         val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
@@ -98,7 +149,7 @@ class LoginActivity : AppCompatActivity() {
         })
 
         var testPW = findViewById<TextInputLayout>(R.id.passwd_btn)
-        // 최소 닉네임 글자수 설정
+        // 최소 비밀번호 글자수 설정
         fun checkPW():Boolean{
             if(passwd.length()<8){
                 testPW.error = "비밀번호는 8자~16자 입니다."

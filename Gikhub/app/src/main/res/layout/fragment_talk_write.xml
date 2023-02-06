@@ -45,7 +45,9 @@
                 android:background="@drawable/input_info_button"
                 android:fontFamily="@font/pretendardregular"
                 android:hint="제목 (25자 내외)"
+                    android:maxLength="25"
                 android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
                 android:textSize="14sp" />
 
             <EditText
@@ -59,6 +61,7 @@
                 android:gravity="left"
                 android:hint="내용"
                 android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
                 android:paddingTop="15dp"
                 android:textSize="14sp" />
 

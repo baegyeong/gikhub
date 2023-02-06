@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gikhub.navigation.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_talk.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -48,6 +50,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         //set default screen
         bottom_navigation.selectedItemId = R.id.action_home
+
     }
 
 }

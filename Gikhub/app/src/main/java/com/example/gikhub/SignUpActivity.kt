@@ -4,16 +4,14 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Color.red
 import android.graphics.Rect
-import android.icu.lang.UCharacter.GraphemeClusterBreak.L
+import android.icu.text.IDNA
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import android.view.MotionEvent
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
@@ -22,17 +20,57 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.view.isEmpty
-import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.firestore.auth.User
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import org.w3c.dom.Text
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.*
 import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
+
+//    data class User(
+//        @SerializedName("email")
+//        val email:String,
+//        @SerializedName("password")
+//        val password:String,
+//        @SerializedName("realName")
+//        val name:String,
+//        @SerializedName("nickName")
+//        val nickName:String,
+//        @SerializedName("phoneNo")
+//        val phoneNo:String
+//    )
+//
+//    interface SignUpInterface{
+//        @POST("/api/user/validation/join")
+//        fun getUser(@Body info: User): Call<User>
+//
+//        @GET("/api/user/email/{email}/exists")
+//        fun overlapEmail(@Path("email") email: String):Call<String>
+//
+//        @GET("/api/user/nickName/{nickName}/exists")
+//        fun overlapNickName(@Path("nickName") nickName: String):Call<String>
+//    }
+//    var gson: Gson = GsonBuilder().setLenient().create()
+//
+//    val retrofit = Retrofit.Builder()
+//        .baseUrl("http://10.0.2.2:8080/")
+//        .addConverterFactory(GsonConverterFactory.create(gson))
+//        .build()
+//    val registerUser = retrofit.create(SignUpInterface::class.java)
+
+
     var isExistBlank = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -113,7 +151,6 @@ class SignUpActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 checkPW()
-
             }
         })
 
@@ -131,9 +168,11 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
 
+
         // 닉네임 특수문자 불가
         val nicknameValidation = "^[ㄱ-ㅣ가-힣a-zA-Z0-9\\\\s]+\$"
         fun checkNickname():Boolean{
+
             var nickname = nickname_input.text.toString().trim()
             val p = Pattern.matches(nicknameValidation, nickname)
             if (p) {
@@ -151,19 +190,8 @@ class SignUpActivity : AppCompatActivity() {
         nickname_input.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
-            override fun afterTextChanged(p0: Editable?) { // 닉네임 중복확인인
-               var isOverlap:Boolean= false
-                overlap.setOnClickListener {
-                    if(checkNickname()&&nicknameLength())
-                        if(isOverlap)
-                            testNickname.error = "중복된 닉네임입니다."
-                        else {
-                            testNickname.error = null
-                            overlap.setText("확인")
-                            overlap.setTextColor(Color.parseColor("#000000"))
-                            overlap.setBackgroundResource(R.drawable.input_info_button)
-                        }
-                }
+            override fun afterTextChanged(p0: Editable?) { // 닉네임 중복확인
+
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 checkNickname()  // 닉네임 특수문자
@@ -171,6 +199,51 @@ class SignUpActivity : AppCompatActivity() {
             }
 
         })
+
+        overlap.setOnClickListener {
+            var nickname = nickname_input.text.toString()
+
+            // 닉네임 중복 검사
+//            lateinit var isOverlapNickname:String
+            var isOverlapNickname="false"
+//            fun returnButton(String: String): String? {
+//                return isOverlapNickname
+//            }
+//
+//            registerUser.overlapNickName("$nickname").enqueue(object : Callback<String> {
+//                override fun onResponse(call: Call<String>, response: Response<String>) {
+//                    if (response.isSuccessful()) {
+//                        Log.d("nick","success${response.body()}")
+//                        val data = response.body()
+//                        if (data != null) {
+//                            returnButton(data)
+//                        }
+//                    }
+//                    else {
+//                        Log.d("nick", "but ${response.errorBody()?.string()!!}")
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<String>, t: Throwable) {
+//                    Log.d("nick", "error:${t.message}")
+//                }
+//            })
+//            Log.d("bool", "$isOverlapNickname")
+
+
+
+            if(checkNickname()&&nicknameLength())
+                if(isOverlapNickname=="true")
+                    testNickname.error = "중복된 닉네임입니다."
+                else {
+                    testNickname.error = null
+                    overlap.setText("확인")
+                    overlap.setTextColor(Color.parseColor("#000000"))
+                    overlap.setBackgroundResource(R.drawable.input_info_button)
+                }
+        }
+
+
 
         // 회원가입 버튼 눌렀을 때
         signup_btn.setOnClickListener {
@@ -189,27 +262,66 @@ class SignUpActivity : AppCompatActivity() {
                 isExistBlank = false
             }
 
-            // 이메일 가져오는 코드
-            val savedEmail: String = "0000@example.com"
+
+           // 이메일 중복 검사
+//          val savedEmail: String = "0000@example.com"
+            var savedEmail:String="false"
+//            registerUser.overlapEmail("$email").enqueue(object : Callback<String> {
+//                override fun onResponse(call: Call<String>, response: Response<String>) {
+//                    if(response.isSuccessful()) {
+//                        Log.d("login", "success ${response}")
+//                        savedEmail = "${response.body()}"
+//                    } else {
+//                        Log.d("login", "but ${response.errorBody()?.string()!!}")
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<String>, t: Throwable) {
+//                    Log.d("login", "error:${t.message}")
+//                }
+//            })
 
 
             if(!isExistBlank) { // 공백 없는 상태에서
-                if (email == savedEmail) // 이미 있는 이메일
+                if (savedEmail=="true") // 이미 있는 이메일
                     dialog()
                 if(!checkEmail()) // 이메일 형식
                     testEmail.error = "이메일 형식이 아닙니다."
                 if(!nicknameLength()) // 닉네임 2자~6자
                     testNickname.error = "닉네임은 2자~6자이어야 합니다."
                 if(overlap.text != "확인")
-                    Toast.makeText(this, "닉네임 중복확인을 해주세요.ㄴㅇ", Toast.LENGTH_SHORT).show()
-                else if(email!=savedEmail && checkEmail() &&nicknameLength() && checkNickname() && checkPW()) {
+                    Toast.makeText(this, "닉네임 중복확인을 해주세요.", Toast.LENGTH_SHORT).show()
+                else if((savedEmail=="false") && checkEmail() &&nicknameLength() && checkNickname() && checkPW()) {
                     Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
                     startActivity(goLogin)
-                    //정보들 저장하는 코드
+
+//                    val user = User("$email", "$passwd", "$name", "$nickname", "$phone")
+//                    Log.d("user","$user")
+//                    registerUser.getUser(user).enqueue(object: Callback<User>{
+//                        override fun onResponse(
+//                            call: Call<User>,
+//                            response: Response<User>
+//                        ) {
+//                            if(response.isSuccessful()){
+//                                Log.d("confirm","success ${response}")
+//                                Log.d("confirm", "$user")
+//                            }else{
+//                                Log.d("confirm","but ${response.errorBody()?.string()!!}")
+//                            }
+//                        }
+//
+//                        override fun onFailure(call: Call<User>, t: Throwable) {
+//                            Log.d("confirm","error:${t.message}")
+//
+//                        }
+//
+//                    })
                 }
             }
         }
     }
+
+
 
     // 화면 클릭시 키보드 내리기 및 포커스 제거
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
