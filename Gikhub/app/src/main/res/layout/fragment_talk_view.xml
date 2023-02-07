@@ -113,7 +113,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:id="@+id/comment_group"
                 android:layout_width="330dp"
-                android:layout_height="wrap_content"
+                android:layout_height="220dp"
                 android:layout_gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
