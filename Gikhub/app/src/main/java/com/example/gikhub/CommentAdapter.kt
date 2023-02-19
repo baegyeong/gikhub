@@ -1,11 +1,14 @@
 package com.example.gikhub
 
 import android.content.Context
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,6 +20,11 @@ class CommentAdapter(private val data: ArrayList<CommentData>) : RecyclerView.Ad
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_comment, parent, false)
+        val commentResource = view.findViewById<LinearLayout>(R.id.comment_resource)
+        val reply = view.findViewById<ImageButton>(R.id.reply)
+        reply.setOnClickListener{
+            commentResource.setBackgroundColor(Color.parseColor("#FFD2EBFF"))
+        }
         return CommentViewHolder(view)
     }
 

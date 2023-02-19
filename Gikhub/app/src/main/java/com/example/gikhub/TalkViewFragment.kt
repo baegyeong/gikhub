@@ -1,6 +1,9 @@
 package com.example.gikhub
 
+import ReplyAdapter
 import android.content.Context
+import android.graphics.Color
+import android.media.Image
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -9,28 +12,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gikhub.databinding.FragmentTalkViewBinding
 import com.example.gikhub.navigation.TalkFragment
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.fragment_talk_view.*
+import kotlinx.android.synthetic.main.fragment_talk_write.*
 import kotlinx.android.synthetic.main.item_comment.*
-import okio.Utf8.size
-import org.w3c.dom.Comment
-import java.nio.file.Files.size
+import kotlinx.android.synthetic.main.item_comment.view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class TalkViewFragment : Fragment() {
     private lateinit var callback: OnBackPressedCallback
-
-
+//    private var _binding: FragmentTalkViewBinding? = null
+//    private val binding get() = _binding!!
     private lateinit var commentRecyclerView : RecyclerView
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -39,7 +41,10 @@ class TalkViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_talk_view, container, false)
+        val view = inflater.inflate(R.layout.fragment_talk_view,container, false)
+
+//        _binding = FragmentTalkViewBinding.inflate(inflater, container, false)
+//        val view = binding.root
 
         commentRecyclerView = view.findViewById(R.id.comment_group)
         var title = arguments?.getString("title")
@@ -59,15 +64,7 @@ class TalkViewFragment : Fragment() {
         val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분")
         val formatted = current.format(formatter)
         postTime.setText("$formatted")
-//
-//        val inputComment = view.findViewById<TextView>(R.id.input_comment)
-//        val sendComment = view.findViewById<ImageView>(R.id.send_comment)
-//        sendComment.setOnClickListener {
-//            commentDataArray.add(CommentData("$postWriter", "$inputComment", "$formatted"))
-//            commentRecyclerView = view.findViewById(R.id.comment_group!!) as RecyclerView
-//            commentRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-//            commentRecyclerView.adapter = CommentAdapter(requireContext(), commentDataArray)
-//        }
+
         return view
 
     }
@@ -82,19 +79,23 @@ class TalkViewFragment : Fragment() {
         val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분")
         val formatted = current.format(formatter).toString()
         val itemList = ArrayList<CommentData>()
+        val replyList = ArrayList<CommentData>()
         val commentCount = view.findViewById<TextView>(R.id.comment_count)
+
         commentCount.setText("댓글 ${itemList.size}")
 
         sendComment.setOnClickListener {
             val inputComment = view.findViewById<EditText>(R.id.input_comment).text.toString()
-            itemList.add(CommentData("$commentName", "$inputComment", "$formatted"))
+            if(inputComment!="") {
+                itemList.add(CommentData("$commentName", "$inputComment", "$formatted"))
+            }
             commentRecyclerView.adapter = CommentAdapter(itemList)
             commentRecyclerView.layoutManager = LinearLayoutManager(requireContext())
             commentCount.setText("댓글 ${itemList.size}")
             input_comment.setText(null)
         }
-
     }
+
 
     override fun onAttach(context: Context){
         super.onAttach(context)
@@ -105,10 +106,14 @@ class TalkViewFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
     }
     override fun onDetach(){
         super.onDetach()
         callback.remove()
     }
-
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 }
