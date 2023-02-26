@@ -18,18 +18,17 @@
 
         <ImageView
             android:id="@+id/logo_img"
-            android:layout_width="92dp"
-            android:layout_height="78dp"
+            android:layout_width="80dp"
+            android:layout_height="55dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/gikhub_logo" />
+            app:srcCompat="@drawable/logo" />
 
         <TextView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/pretendardbold"
             android:shadowColor="#40000000"
             android:shadowRadius="10.0"

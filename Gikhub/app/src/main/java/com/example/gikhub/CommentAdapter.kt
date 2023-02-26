@@ -1,17 +1,11 @@
 package com.example.gikhub
 
-import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_comment.view.*
 
 class CommentAdapter(private val data: ArrayList<CommentData>) : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
@@ -28,7 +22,7 @@ class CommentAdapter(private val data: ArrayList<CommentData>) : RecyclerView.Ad
         return CommentViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CommentAdapter.CommentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         holder.view.name.text = data[position].name
         holder.view.comment.text = data[position].comment
         holder.view.date.text = data[position].date

@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:id="@+id/action_buy"
-        android:icon="@drawable/buy"
-        android:enabled="true"
-        android:title="@string/buy"/>
-    <item
-        android:id="@+id/action_eat"
-        android:icon="@drawable/eat"
-        android:enabled="true"
-        android:title="@string/eat"/>
-
-    <item
-        android:id="@+id/action_home"
-        android:icon="@drawable/home"
-        android:enabled="true"
-        android:title="@string/home"/>
     <item
         android:id="@+id/action_talk"
         android:icon="@drawable/talk"
         android:enabled="true"
         android:title="@string/talk"/>
+    <item
+            android:id="@+id/action_home"
+            android:icon="@drawable/home"
+            android:enabled="true"
+            android:title="@string/home"/>
     <item
         android:id="@+id/action_mypage"
         android:icon="@drawable/user"

@@ -18,16 +18,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 supportFragmentManager.beginTransaction().replace(R.id.main_content,homeFragment).commit()
                 return true
             }
-            R.id.action_buy ->{
-                var buyFragment= BuyFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.main_content,buyFragment).commit()
-                return true
-            }
-            R.id.action_eat ->{
-                var eatFragment= EatFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.main_content,eatFragment).commit()
-                return true
-            }
             R.id.action_mypage ->{
                 var userFragment= UserFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_content,userFragment).commit()

@@ -1,13 +1,9 @@
-import android.graphics.Color
+package com.example.gikhub
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gikhub.CommentAdapter
-import com.example.gikhub.CommentData
-import com.example.gikhub.R
 import kotlinx.android.synthetic.main.item_comment.view.*
 
 class ReplyAdapter(private val data: ArrayList<CommentData>) :RecyclerView.Adapter<ReplyAdapter.ReplyViewHolder>(){
@@ -19,7 +15,7 @@ class ReplyAdapter(private val data: ArrayList<CommentData>) :RecyclerView.Adapt
         return ReplyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ReplyAdapter.ReplyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ReplyViewHolder, position: Int) {
         holder.view.name.text = data[position].name
         holder.view.comment.text = data[position].comment
         holder.view.date.text = data[position].date

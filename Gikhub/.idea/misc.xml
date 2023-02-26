@@ -8,8 +8,12 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Gikhub/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/button_round_login.xml" value="0.1485" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/button_round_signup.xml" value="0.132" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/detail-grid-style.xml" value="0.323" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/detail_grid_style.xml" value="0.323" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/detail_grid_style_green.xml" value="0.323" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/grid_style.xml" value="0.323" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2605" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/input_info_button.xml" value="0.1485" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/input_info_button.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/input_tool.xml" value="0.26" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/menu_selector_blue.xml" value="0.3445" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/drawable/menu_selector_color.xml" value="0.1" />
@@ -25,7 +29,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_login.xml" value="0.36465324384787473" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_onboarding.xml" value="0.33" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_sign_up.xml" value="0.5" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_talk_fragment.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/activity_user_fragment.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/enter_from_left.xml" value="0.22407407407407406" />
@@ -34,7 +38,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/fragment_eat.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/fragment_talk.xml" value="0.1" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/fragment_talk_view.xml" value="0.22" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/fragment_talk_view.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/fragment_talk_write.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/fragment_talk_write2.xml" value="0.4348958333333333" />
         <entry key="..\:/Users/User/AndroidStudioProjects/frontend/Gikhub/app/src/main/res/layout/fragment_user.xml" value="0.4348958333333333" />

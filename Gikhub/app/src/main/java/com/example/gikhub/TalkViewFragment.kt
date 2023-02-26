@@ -1,40 +1,27 @@
 package com.example.gikhub
 
-import ReplyAdapter
 import android.content.Context
-import android.graphics.Color
-import android.media.Image
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gikhub.databinding.FragmentTalkViewBinding
 import com.example.gikhub.navigation.TalkFragment
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.fragment_talk_view.*
-import kotlinx.android.synthetic.main.fragment_talk_write.*
-import kotlinx.android.synthetic.main.item_comment.*
-import kotlinx.android.synthetic.main.item_comment.view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class TalkViewFragment : Fragment() {
     private lateinit var callback: OnBackPressedCallback
-//    private var _binding: FragmentTalkViewBinding? = null
-//    private val binding get() = _binding!!
     private lateinit var commentRecyclerView : RecyclerView
-
+    private lateinit var replyRecyclerView: RecyclerView
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,10 +30,8 @@ class TalkViewFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_talk_view,container, false)
 
-//        _binding = FragmentTalkViewBinding.inflate(inflater, container, false)
-//        val view = binding.root
-
         commentRecyclerView = view.findViewById(R.id.comment_group)
+
         var title = arguments?.getString("title")
         var content = arguments?.getString("content")
 
@@ -91,6 +76,7 @@ class TalkViewFragment : Fragment() {
             }
             commentRecyclerView.adapter = CommentAdapter(itemList)
             commentRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            replyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
             commentCount.setText("댓글 ${itemList.size}")
             input_comment.setText(null)
         }
