@@ -1,19 +1,24 @@
 package com.example.gikhub
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gikhub.navigation.TalkFragment
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.fragment_talk.*
 import kotlinx.android.synthetic.main.fragment_talk_view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -28,7 +33,7 @@ class TalkViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_talk_view,container, false)
+        val view = inflater.inflate(R.layout.fragment_talk_view, container, false)
 
         commentRecyclerView = view.findViewById(R.id.comment_group)
 
@@ -49,6 +54,34 @@ class TalkViewFragment : Fragment() {
         val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분")
         val formatted = current.format(formatter)
         postTime.setText("$formatted")
+
+        val detail = view.findViewById<ImageView>(R.id.detail)
+        detail.setOnClickListener{
+            var popupMenu = PopupMenu(requireContext(), detail)
+            popupMenu.menuInflater.inflate(R.menu.write_menu, popupMenu.menu)
+
+            val talkWriteFragment = TalkWriteFragment()
+            val fragmentManager = (activity as MainActivity)!!.supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+
+            popupMenu.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId){
+                    R.id.action_refactor-> {
+                        framelayout_view.removeAllViews()
+                        fragmentTransaction.add(R.id.framelayout_view, talkWriteFragment)
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
+                        true
+                    }
+                    R.id.action_delete->{
+                        true
+                    }
+                    else -> false
+                }
+
+            }
+            popupMenu.show()
+        }
 
         return view
 
@@ -76,10 +109,12 @@ class TalkViewFragment : Fragment() {
             }
             commentRecyclerView.adapter = CommentAdapter(itemList)
             commentRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-            replyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+//            replyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
             commentCount.setText("댓글 ${itemList.size}")
             input_comment.setText(null)
         }
+
+
     }
 
 

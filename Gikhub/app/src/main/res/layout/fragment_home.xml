@@ -2,264 +2,271 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".navigation.HomeFragment">
-
-<ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout
-            android:orientation="vertical"
+        android:layout_height="match_parent"
+        tools:context=".navigation.HomeFragment">
+
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
-
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp">
-
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                <TextView
-                        android:text="HELLO, MOLY!"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:id="@+id/textView"
-                        android:textStyle="bold" />
-
-                <TextView
-                        android:text="김지민님, 환영합니다.\n슬기로운 기숙사 라이프를 경험하세요!"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView2" />
-            </LinearLayout>
-
-            <ImageView
-                    android:src="@drawable/home_icon"
-                    android:layout_width="56dp"
-                    android:layout_height="73dp"
-                    android:id="@+id/imageView"
-                    android:layout_weight="1" />
-        </LinearLayout>
-
-        <TextView
-                android:text="기숙사 공지사항"
-                android:textColor="@color/blue"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/textView3" />
-
-        <androidx.gridlayout.widget.GridLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:orientation="vertical"
-                android:layout_gravity="center"
-                app:rowCount="2"
-                app:columnCount="2">
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:orientation="vertical"
-                    android:background="@drawable/grid_style"
-                    android:layout_margin="10dp">
-
-                <TextView
-                        android:text="제목"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView4" />
-
-                <TextView
-                        android:text="카테고리"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:id="@+id/textView6" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                        android:text="상세내용 보러가기"
-                        android:background="@drawable/detail_grid_style"
-                        android:layout_width="150dp"
-                        android:layout_height="38dp"
-                        android:textColor="@color/blue"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:id="@+id/button" />
-            </LinearLayout>
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:orientation="vertical"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/grid_style">
-
-                <TextView
-                        android:text="제목"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                <TextView
-                        android:text="카테고리"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"/>
-
-                <androidx.appcompat.widget.AppCompatButton
-                        android:text="상세내용 보러가기"
-                        android:background="@drawable/detail_grid_style"
-                        android:layout_width="150dp"
-                        android:layout_height="38dp"
-                        android:textColor="@color/blue"
-                        android:textSize="12sp"
-                        android:textStyle="bold"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:orientation="vertical"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/grid_style">
-
-                <TextView
-                        android:text="제목"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                <TextView
-                        android:text="카테고리"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"/>
-
-                <androidx.appcompat.widget.AppCompatButton
-                        android:text="상세내용 보러가기"
-                        android:background="@drawable/detail_grid_style"
-                        android:layout_width="150dp"
-                        android:layout_height="38dp"
-                        android:textColor="@color/blue"
-                        android:textSize="12sp"
-                        android:textStyle="bold"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:orientation="vertical"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/grid_style">
-
-                <TextView
-                        android:text="제목"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                <TextView
-                        android:text="카테고리"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"/>
-
-                <androidx.appcompat.widget.AppCompatButton
-                        android:text="상세내용 보러가기"
-                        android:background="@drawable/detail_grid_style"
-                        android:layout_width="150dp"
-                        android:layout_height="38dp"
-                        android:textColor="@color/blue"
-                        android:textSize="12sp"
-                        android:textStyle="bold"/>
-            </LinearLayout>
-        </androidx.gridlayout.widget.GridLayout>
-
-        <TextView
-                android:text="지금 가장 핫한 토크토크"
-                android:textColor="@color/green"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="20dp"/>
+            android:layout_height="match_parent">
 
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp">
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                    <TextView
+                            android:text="HELLO, MOLY!"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:id="@+id/textView"
+                            android:textStyle="bold" />
+
+                    <TextView
+                            android:text="김지민님, 환영합니다.\n슬기로운 기숙사 라이프를 경험하세요!"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView2" />
+                </LinearLayout>
+
+                <ImageView
+                        android:src="@drawable/home_icon"
+                        android:layout_width="56dp"
+                        android:layout_height="73dp"
+                        android:id="@+id/imageView"
+                        android:layout_weight="1" />
+            </LinearLayout>
 
             <TextView
-                android:layout_gravity="center"
-                    android:layout_width="370dp"
-                    android:layout_height="40dp"
-                    android:text="01"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:background="@drawable/detail_grid_style_green"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="13dp"
-                    android:paddingLeft="13dp"/>
+                    android:text="기숙사 공지사항"
+                    android:textColor="@color/blue"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/textView3" />
+
+            <androidx.gridlayout.widget.GridLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:orientation="vertical"
+                    android:layout_gravity="center"
+                    app:rowCount="2"
+                    app:columnCount="2">
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/grid_style"
+                        android:layout_margin="10dp">
+
+                    <TextView
+                            android:text="제목"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView4" />
+
+                    <TextView
+                            android:text="카테고리"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:id="@+id/textView6" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                            android:text="상세내용 보러가기"
+                            android:background="@drawable/detail_grid_style"
+                            android:layout_width="150dp"
+                            android:layout_height="38dp"
+                            android:textColor="@color/blue"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:id="@+id/button" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:orientation="vertical"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/grid_style">
+
+                    <TextView
+                            android:text="제목"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    <TextView
+                            android:text="카테고리"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                            android:text="상세내용 보러가기"
+                            android:background="@drawable/detail_grid_style"
+                            android:layout_width="150dp"
+                            android:layout_height="38dp"
+                            android:textColor="@color/blue"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:orientation="vertical"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/grid_style">
+
+                    <TextView
+                            android:text="제목"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    <TextView
+                            android:text="카테고리"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                            android:text="상세내용 보러가기"
+                            android:background="@drawable/detail_grid_style"
+                            android:layout_width="150dp"
+                            android:layout_height="38dp"
+                            android:textColor="@color/blue"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:orientation="vertical"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/grid_style">
+
+                    <TextView
+                            android:text="제목"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    <TextView
+                            android:text="카테고리"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                            android:text="상세내용 보러가기"
+                            android:background="@drawable/detail_grid_style"
+                            android:layout_width="150dp"
+                            android:layout_height="38dp"
+                            android:textColor="@color/blue"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.gridlayout.widget.GridLayout>
 
             <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="370dp"
-                    android:layout_height="40dp"
-                    android:text="01"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:background="@drawable/detail_grid_style_green"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="13dp"
-                    android:paddingLeft="13dp"/>
-            <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="370dp"
-                    android:layout_height="40dp"
-                    android:text="01"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:background="@drawable/detail_grid_style_green"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="13dp"
-                    android:paddingLeft="13dp"/>
+                    android:text="지금 가장 핫한 토크토크"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="20dp" />
 
-            <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="370dp"
-                    android:layout_height="40dp"
-                    android:text="01"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:background="@drawable/detail_grid_style_green"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="13dp"
-                    android:paddingLeft="13dp"/>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="370dp"
+                        android:layout_height="40dp"
+                        android:text="01"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:background="@drawable/detail_grid_style_green"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="13dp"
+                        android:paddingLeft="13dp" />
+
+                <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="370dp"
+                        android:layout_height="40dp"
+                        android:text="02"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:background="@drawable/detail_grid_style_green"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="13dp"
+                        android:paddingLeft="13dp" />
+
+                <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="370dp"
+                        android:layout_height="40dp"
+                        android:text="03"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:background="@drawable/detail_grid_style_green"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="13dp"
+                        android:paddingLeft="13dp" />
+
+                <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="370dp"
+                        android:layout_height="40dp"
+                        android:text="04"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:background="@drawable/detail_grid_style_green"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="13dp"
+                        android:paddingLeft="13dp" />
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"/>
         </LinearLayout>
 
-    </LinearLayout>
 
-
-</ScrollView>
+    </ScrollView>
 </FrameLayout>
