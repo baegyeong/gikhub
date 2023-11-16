@@ -214,57 +214,111 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                <TextView
+                <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_gravity="center"
                         android:layout_width="370dp"
                         android:layout_height="40dp"
-                        android:text="01"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
                         android:background="@drawable/detail_grid_style_green"
                         android:gravity="center_vertical"
                         android:layout_marginBottom="13dp"
-                        android:paddingLeft="13dp" />
+                        android:paddingLeft="13dp">
 
-                <TextView
-                        android:layout_gravity="center"
-                        android:layout_width="370dp"
-                        android:layout_height="40dp"
-                        android:text="02"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:background="@drawable/detail_grid_style_green"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="13dp"
-                        android:paddingLeft="13dp" />
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="01"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
-                <TextView
-                        android:layout_gravity="center"
-                        android:layout_width="370dp"
-                        android:layout_height="40dp"
-                        android:text="03"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:background="@drawable/detail_grid_style_green"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="13dp"
-                        android:paddingLeft="13dp" />
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="긱허브 재밌네 키득키득"
+                            android:textSize="13sp" />
+                </LinearLayout>
 
-                <TextView
+
+                <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_gravity="center"
                         android:layout_width="370dp"
                         android:layout_height="40dp"
-                        android:text="04"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
                         android:background="@drawable/detail_grid_style_green"
                         android:gravity="center_vertical"
                         android:layout_marginBottom="13dp"
-                        android:paddingLeft="13dp" />
+                        android:paddingLeft="13dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="02"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="긱허브 재밌네 키득키득"
+                            android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:layout_width="370dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/detail_grid_style_green"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="13dp"
+                        android:paddingLeft="13dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="03"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="긱허브 재밌네 키득키득"
+                            android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:layout_width="370dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/detail_grid_style_green"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="13dp"
+                        android:paddingLeft="13dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="04"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="긱허브 재밌네 키득키득"
+                            android:textSize="13sp" />
+                </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"/>
+                    android:layout_height="80dp" />
         </LinearLayout>
 
 
